@@ -86,10 +86,10 @@ def ridge_model(X, y):# Ridge with 5 fold cross-validation
 
 
 
-def mse_on_fold_lasso_plot(model=LassoCV(), ymin, ymax):
+def mse_on_fold_lasso_plot(ymin, ymax, model=LassoCV()):
     '''
     
-    this only works with a LassoCV model or the model output from the
+    this only works with a fitted LassoCV model or the model output from the
     lasso_model function above
     
     '''
