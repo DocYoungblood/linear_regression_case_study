@@ -39,15 +39,22 @@ Have fun!
 '''
 
 def lasso_model(X, y):# Lasso with 5 fold cross-validation
+    '''
+    to get both variables returned from this function, call it this way:
+
+    model, lasso_best = fun.lasso_model(X.reshape(-1, 1), y)
+
+    you can then use this model output in the mse_on_fold_lasso_plot 
+    below for a fun time.
+    '''
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.3, random_state=40)
-    #model = LassoCV(cv=10, random_state=40, max_iter=10000)
-    model = make_pipeline(StandardScaler(), LassoCV(cv=10, random_state=40, max_iter=10000))
+    model = LassoCV(cv=10, random_state=40, max_iter=10000)
     # Fit model
     model.fit(X_train, y_train)
 
-    model[1].alpha_
+    model.alpha_
 
-    lasso_best = Lasso(alpha=model[1].alpha_)
+    lasso_best = Lasso(alpha=model.alpha_)
     lasso_best.fit(X_train, y_train)
     print('Best coeficient - X value:', list(zip(lasso_best.coef_, X)))
     print('R squared training set', round(lasso_best.score(X_train, y_train)*100, 2))
@@ -58,7 +65,7 @@ def lasso_model(X, y):# Lasso with 5 fold cross-validation
 
 
 
-def ridge_model(X, y):# Lasso with 5 fold cross-validation
+def ridge_model(X, y):# Ridge with 5 fold cross-validation
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.3, random_state=40)
     model1 = RidgeCV(cv=10)
 
@@ -79,7 +86,13 @@ def ridge_model(X, y):# Lasso with 5 fold cross-validation
 
 
 
-def mse_on_fold_plot(model, ymin, ymax):
+def mse_on_fold_lasso_plot(model=LassoCV(), ymin, ymax):
+    '''
+    
+    this only works with a LassoCV model or the model output from the
+    lasso_model function above
+    
+    '''
     fig, ax1 = plt.subplots(figsize=(12, 6))
     ax1.semilogx(model.alphas_, model.mse_path_, ":")
     
