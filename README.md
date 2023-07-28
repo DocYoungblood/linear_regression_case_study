@@ -31,7 +31,8 @@ To understand how the features in our dataset relate to each other and to the ta
 We visualized these correlations using a heatmap. In the heatmap, each square shows the correlation between the variables on each axis. Correlation values range from -1 to 1. Values close to 1 indicate a strong positive correlation, values close to -1 indicate a strong negative correlation, and values close to 0 indicate no correlation.
 
 Let's take a look at the heatmap:  
-![Heatmap](image.png)
+![Heatmap](https://github.com/DocYoungblood/linear_regression_case_study/assets/96899068/5f6cde7c-409f-495f-81e6-90780f0b6750)
+
 
 This matrix was a part of our initial evaluation of the data. It seems to suggest that amount funded by investors, or the initial down payment, has the greatest effect on interest rate. We will do a deeper, much more technical, look at the numbers to determine if that is true and how you can get the most bang for your buck when it comes to a business loan.
 
@@ -61,7 +62,8 @@ We followed these steps to build our model:
 
 7. **Visualization:** We visualized the results using a confusion matrix. The confusion matrix gives us a 'clear' picture of how our model is performing and where the misclassifications are happening.
 
-![Confusion Matrix](image-1.png)
+![Confusion Matrix](https://github.com/DocYoungblood/linear_regression_case_study/assets/96899068/b3a5ac80-6a50-47d4-b3f8-b37343d263c6)
+
 
 Low interest rates are those below 10.24 % and High are those above 15%. Medium are all those between.
 
