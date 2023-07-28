@@ -55,6 +55,9 @@ def lasso_model(X, y):# Lasso with 5 fold cross-validation
     print('MSE:', mean_squared_error(y_test, lasso_best.predict(X_test)))
     return model, lasso_best
 
+
+
+
 def ridge_model(X, y):# Lasso with 5 fold cross-validation
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.3, random_state=40)
     model1 = RidgeCV(cv=10)
@@ -72,6 +75,9 @@ def ridge_model(X, y):# Lasso with 5 fold cross-validation
     print('R squared test set', round(ridge_best.score(X_test, y_test)*100, 2))
     print(mean_squared_error(y_test, ridge_best.predict(X_test)))
     return model1, ridge_best
+
+
+
 
 def mse_on_fold_plot(model, ymin, ymax):
     fig, ax1 = plt.subplots(figsize=(12, 6))
@@ -99,7 +105,11 @@ def mse_on_fold_plot(model, ymin, ymax):
     ax1.set_ylim(ymin, ymax);
 
 
-def coeficients_plot(alphas, X, y, model):
+
+
+
+def coeficients_plot(model, X, y):
+    alphas = np.linspace(0.01,500,100)
     coefs = []
     for a in alphas:
         model.set_params(alpha=a)
@@ -114,6 +124,64 @@ def coeficients_plot(alphas, X, y, model):
     plt.xlabel('alpha')
     plt.ylabel('Standardized Coefficients')
     plt.title('Lasso coefficients as a function of alpha')
+
+
+
+
+def residual_plot_w_qq(model, X, y):
+    '''
+    if you are doing a plot with a single feature you have to cast 
+    it as an array first like this:
+    
+    X_funded= np.asarray(X['amount_funded_by_investors'])
+
+    '''
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=10)
+    visualizer = ResidualsPlot(model, hist=False, qqplot=True)
+    visualizer.fit(X_train.reshape(-1, 1), y_train)  
+    visualizer.score(X_test.reshape(-1, 1), y_test) 
+    visualizer.poof()
+
+
+
+
+def prediction_error_plot(model, X, y):
+    '''
+    if you are doing a plot with a single feature you have to cast 
+    it as an array first like this:
+    
+    X_funded= np.asarray(X['amount_funded_by_investors'])
+    
+    '''
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=10)
+    visualizer = PredictionError(model)
+    visualizer.fit(X_train.reshape(-1, 1), y_train)  
+    visualizer.score(X_test.reshape(-1, 1), y_test)  
+    visualizer.poof()
+
+
+
+def three_way_scatter_plot(data, y_col, x_col, hue_col, plot_title, legend_title, xlabel, ylabel):
+    '''
+    call like so:
+
+    three_way_scatter_plot(df1
+                       ,'interest_rate'
+                       , 'amount_requested'
+                       , 'loan_length'
+                       , 'Interest Rate and Amount Requested\nBy Loan Length'
+                       , 'Loan Length'
+                       , 'Amount Requested'
+                       , 'Interest Rate')
+    
+    '''
+    
+    sns.set_theme()
+    sns.scatterplot(data, y=y_col, x=x_col, hue=hue_col)
+    plt.suptitle(plot_title, fontstyle='italic')
+    plt.legend(title= legend_title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel);
 
 if __name__ == '__main__':
     pass
