@@ -83,8 +83,12 @@ In the context of our model, we want the diagonal cells to be darker (higher val
 Based on the analysis and model results, we can make the following recommendations to new business owners seeking a loan:
 
 1. **FICO Score:** A higher FICO score generally leads to a lower interest rate. Therefore, improving your credit score before applying for a loan could help you secure a better rate.
+   ![image](https://github.com/DocYoungblood/linear_regression_case_study/assets/96899068/629c686d-9e64-428d-ba37-1dd331ee1553)
+
 
 2. **Loan Length:** Shorter loan lengths tend to have lower interest rates. If possible, consider choosing a shorter loan length to reduce the total amount of interest you'll pay.
+   ![image](https://github.com/DocYoungblood/linear_regression_case_study/assets/96899068/976e6d3f-6aa1-4303-bd5a-c3a9247267e5)
+
 
 3. **Amount Requested:** Requesting a larger loan amount may lead to a higher interest rate. Be mindful of this when deciding how much funding to request.
 
